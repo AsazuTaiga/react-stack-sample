@@ -1,12 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { StackView } from "./components/StackView";
+import { SampleChild } from "./components/SampleChild";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <StackView>
+          {[...new Array(10)].map((_, i) => (
+            <div>
+              これは{i + 1}こめです
+              <SampleChild />
+            </div>
+          ))}
+        </StackView>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
