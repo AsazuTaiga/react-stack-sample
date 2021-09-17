@@ -17,7 +17,11 @@ const StackContext = createContext<{
   toIndexAt: (_: number) => void 0,
 });
 
-export const StackView: VFC<{ children: ReactElement[] }> = ({ children }) => {
+export const StackView: VFC<{
+  children: ReactElement[];
+  onNext?: () => void;
+  onPrev?: () => void;
+}> = ({ children, onNext, onPrev }) => {
   const [index, setIndex] = useState(0);
   const length = children.length;
 
@@ -26,6 +30,7 @@ export const StackView: VFC<{ children: ReactElement[] }> = ({ children }) => {
       console.warn("StackView Warning: Out range of stack items.");
       return;
     }
+    onNext?.();
     setIndex((i) => i + 1);
   };
   const toPrev = () => {
@@ -33,6 +38,7 @@ export const StackView: VFC<{ children: ReactElement[] }> = ({ children }) => {
       console.warn("StackView Warning: Out range of stack items.");
       return;
     }
+    onPrev?.();
     setIndex((i) => i - 1);
   };
   const toIndexAt = (i: number) => {
